@@ -20,7 +20,7 @@ const App = () => {
     return (
         <div className={`flex h-screen ${sidebarOpen ? 'overflow-hidden' : ''}`}>
             <Sidebar toggleSidebar={toggleSidebar} />
-            <div className="flex-grow">
+            <div className="flex-grow flex items-center justify-center p-4 transition-all duration-300 ease-in-out">
                 <MainContent searchQuery={searchQuery} />
             </div>
         </div>
