@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
+import MainContent from './MainContent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
+
+    const searchQuery = () => {
+        const input = document.getElementById('searchInput').value;
+        if (input) {
+            const encodedQuery = encodeURIComponent(input);
+            window.location.href = `/?q=${encodedQuery}`;
+        }
+    };
+
+    return (
+        <div className={`flex h-screen ${sidebarOpen ? 'overflow-hidden' : ''}`}>
+            <Sidebar toggleSidebar={toggleSidebar} />
+            <div className="flex-grow">
+                <MainContent searchQuery={searchQuery} />
+            </div>
+        </div>
+    );
+};
 
 export default App;
